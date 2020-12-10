@@ -15,11 +15,11 @@ library(AER)
 library(ggplot2) 
 ```
 
-```{r QUESTION 1, child='./question_1.Rmd'}
+```{r QUESTION 1, child='./questions/question_1.Rmd'}
 ```
 
-```{r QUESTION 2, child='./question_2.Rmd'}
+```{r QUESTION 2, child='./questions/question_2.Rmd'}
 ```
 
-```{r QUESTION 3, child='./question_3.Rmd'}
+```{r QUESTION 3, child='./questions/question_3.Rmd'}
 ```
