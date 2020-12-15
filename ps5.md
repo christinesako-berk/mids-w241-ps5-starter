@@ -13,15 +13,7 @@ library(AER)
 library(ggplot2) 
 ```
 
-``` r
-knitr::opts_chunk$set(purl = TRUE)
-```
-
 # 1. Online advertising natural experiment.
-
-``` r
-knitr::opts_chunk$set(purl = TRUE)
-```
 
 These are simulated data (closely, although not entirely) based on a
 real example, adopted from Randall Lewis’ dissertation at MIT.
@@ -57,11 +49,7 @@ August (\~250,000 users for each of the two experiments). Each row in
 the dataset corresponds to a user exposed to one of these campaigns.
 
 ``` r
-library(data.table)
-library(stargazer)
-library(dplyr)
-
-d <- fread('./data/ps5_no1.csv')
+d <- fread('../data/ps5_no1.csv')
 ```
 
 The variables in the dataset are described below:
@@ -111,9 +99,11 @@ Simplifying assumptions you should make when answering this problem:
 First things first, these variable names are frustrating. Rename them.
 
 ``` r
-setnames(d, 
-         old = c('total_ad_exposures_week1', 'treatment_ad_exposures_week1'), 
-         new = c('total_ads', 'treatment_ads'))
+setnames(
+  d, 
+  old = c('total_ad_exposures_week1', 'treatment_ad_exposures_week1'), 
+  new = c('total_ads', 'treatment_ads')
+)
 ```
 
 ## Questions to Answer
@@ -188,19 +178,23 @@ model_causal <- 'fill this in'
 model_overall <- 'fill this in'
 ```
 
-1.  If you look at purchases in each week – week 1 through week 10 –
-    what is the relationship between treatment ads and purchases in each
-    of those weeks. This is now ranging into exploring data with models
-    – how many have we run in this question alone!? – so consider
+1.  If you look at purchases in each week – one regression estimated for
+    each outcome from week 1 through week 10 (that’s 10 regression in a
+    row) – what is the relationship between treatment ads and purchases
+    in each of those weeks. This is now ranging into exploring data with
+    models – how many have we run in this question alone!? – so consider
     whether a plot might help make whatever relationship exists more
     clear.
 
-2.  What might explain this pattern in your data. Stay curious when
-    you’re writing models! But, also be clear that we’re fitting a
-    **lot** of models and making up a theory/explaination after the
-    fact.
+``` r
+# write whatever you want to estiamte this
+```
 
-3.  We started by making the assumption that there was a linear
+1.  What might explain this pattern in your data. Stay curious when
+    you’re writing models! But, also be clear that we’re fitting a
+    **lot** of models and making up a theory/explanation after the fact.
+
+1.  We started by making the assumption that there was a linear
     relationship between the treatment ads and purchases. What other
     types of relationships might exist? After you propose at least two
     additional non-linear relationships, write a model that estimates
@@ -232,7 +226,7 @@ to 1) your draft number, the likelier it was you would be drafted.
 
 We have generated a fake version of this data for your use in this
 project. You can find real information
-(here)\[<https://www.sss.gov/About/History-And-Records/lotter1>\]. While
+[here](https://www.sss.gov/About/History-And-Records/lotter1). While
 we’re defining having a high draft number as falling at 80, in reality
 in 1970 any number lower than 195 would have been a “high” draft number,
 in 1971 anything lower than 125 would have been “high”.
@@ -259,6 +253,10 @@ Some simplifying assumptions:
     number of years of education obtained.
 -   Assume all the data points are from Americans born in a single year
     and we do not need to worry about cohort effects of any kind.
+
+``` r
+d <- fread("../data/ps5_no2.csv")
+```
 
 ## Questions to Answer
 
@@ -328,7 +326,8 @@ In what ways might having a high draft rank affect individuals’ income
     treatment condition. That is, conduct a formal test of the
     hypothesis that the “high-ranked draft number” treatment has no
     effect on whether we observe a person’s income. **(Note, that an
-    earning of $0 *actually* means they didn’t earn any money.)**
+    earning of $0 *actually* means they didn’t earn any money –
+    i.e. earning $0 does not mean that their data wasn’t measured.)**
 
 ``` r
 model_differential_attrition <- 'fill this in'
@@ -341,7 +340,6 @@ model_differential_attrition <- 'fill this in'
 # 3. Optional: Think about Treatment Effects
 
 Throughout this course we have focused on the average treatment effect.
-Think back to *why* we are concerned about the average treatment effect.
-What is the relationship between an ATE, and some individuals’ potential
-outcomes? Make the strongest case you can for why this is a *good*
-measure.
+*Why* we are concerned about the average treatment effect. What is the
+relationship between an ATE, and some individuals’ potential outcomes?
+Make the strongest case you can for why this is a *good* measure.
