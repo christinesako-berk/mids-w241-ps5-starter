@@ -2,7 +2,6 @@
 ## General Guidelines 
 - Please submit a markdown document that contains all your code and answers. 
 - This document should be created by a `.Rmd` file that we can execute that produces all answers, without error. 
-<!-- - Your work should be created on a new branch called `answers`  -->
 - You do not need to show work for trivial calculations, but showing work is always allowed.
 - For answers that involve a narrative response, please feel free to describe the key concept directly and briefly, if you can do so, and do not feel pressure to go on at length.
 - Please ask us questions about the problem set if you get stuck. *Don’t spend more than 20 minutes puzzling over what a problem means.* 
@@ -11,22 +10,14 @@
 - For computing answers, please store them in the answer objects we have created. 
 - Use inline code evaluation to write your answers.
 
-## Assignment Turnin Guidelines
-
-1. To start, [**fork** the repository][forking].
-2. [**Clone**][ref-clone] the repository to your computer.
-3. Modify the files and [**commit**][ref-commit] changes to complete your solution.
-4. [**Push**][ref-push]/sync the changes up to GitHub.
-5. [Create a **pull request**][pull-request] on the original repository to turn in the assignment.
-
 # Working Collaboratively
-We come from a PhD program where all of the students (now
+We (all!) come from a PhD program where all of the students (now
 faculty @ UCB, Harvard, Princeton, UCLA, UofMichigan, UT-Austin)
 worked together to make everyone better. We think that the
 *collaborative* model  is a fantastic model, and We want to bring it
 forward into this class. Talk with your friends, work together on
 homework, create study groups. We _promise_ that you will learn more
-from your friend and classmates than me.
+from your friends and classmates than the instructors.
 
 However, collaboration does not mean:
 
@@ -45,20 +36,5 @@ you where they are.
 
 *But, don't.*
 
-To do so would be a _severe_ violation
-of the trust that We've got in you, our students. And, _know_ that if you
-do, We'll be able to tell. We wrote these problems and solution sets,
-and it is remarkably easy to tell one's own words and coding
-idioms. Currently, We figure that We're batting 1.000 catching people who
-have broken the classes' collective trust. 
-
-
-<!-- Links -->
-[forking]: https://guides.github.com/activities/forking/
-[ref-clone]: http://gitref.org/creating/#clone
-[ref-commit]: http://gitref.org/basic/#commit
-[ref-push]: http://gitref.org/remotes/#push
-[pull-request]: https://help.github.com/articles/creating-a-pull-request
-
-
+Use this as a chance to learn. 
 

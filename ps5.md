@@ -5,12 +5,14 @@ Alex, Scott & Micah
 
 ``` r
 library(data.table)
+
 library(sandwich)
 library(lmtest)
 
 library(AER) 
 
 library(ggplot2) 
+library(patchwork)
 ```
 
 # 1. Online advertising natural experiment.

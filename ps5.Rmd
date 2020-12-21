@@ -7,12 +7,14 @@ output: github_document
 
 ```{r load packages, message = FALSE}
 library(data.table)
+
 library(sandwich)
 library(lmtest)
 
 library(AER) 
 
 library(ggplot2) 
+library(patchwork)
 ```
 
 ```{r QUESTION 1, child='./questions/question_1.Rmd'}
