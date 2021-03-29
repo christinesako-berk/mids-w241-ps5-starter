@@ -18,7 +18,9 @@ Some simplifying assumptions:
 
 
 ```{r load draft data}
-d <- fread("../data/ps5_no2.csv")
+d <- fread('https://ucb-mids-w241.s3-us-west-1.amazonaws.com/ps5_no2.csv')
+
+head(d)
 ```
 
 ## Questions to Answer

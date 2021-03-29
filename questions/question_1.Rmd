@@ -11,7 +11,7 @@ This natural experiment allows us to use the users who log onto Yahoo! during od
 Imagine you are an advertiser who has purchased advertising from Yahoo! that is subject to this randomization on two occasions. Here is a link to (fake) data on 500,000 randomly selected users who visited Yahoo!’s homepage during each of your two advertising campaigns, one you conducted for product A in March and one you conducted for product B in August (~250,000 users for each of the two experiments). Each row in the dataset corresponds to a user exposed to one of these campaigns.
 
 ```{r load yahoo data, message=FALSE}
-d <- fread('../data/ps5_no1.csv')
+d <- fread('https://ucb-mids-w241.s3-us-west-1.amazonaws.com/ps5_no1.csv')
 ```
 
 The variables in the dataset are described below:
@@ -41,6 +41,11 @@ setnames(
   new = c('total_ads', 'treatment_ads')
 )
 ```
+
+```{r}
+head(d)
+```
+
 
 ## Questions to Answer 
 

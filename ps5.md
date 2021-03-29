@@ -51,7 +51,7 @@ August (\~250,000 users for each of the two experiments). Each row in
 the dataset corresponds to a user exposed to one of these campaigns.
 
 ``` r
-d <- fread('../data/ps5_no1.csv')
+d <- fread('https://ucb-mids-w241.s3-us-west-1.amazonaws.com/ps5_no1.csv')
 ```
 
 The variables in the dataset are described below:
@@ -107,6 +107,25 @@ setnames(
   new = c('total_ads', 'treatment_ads')
 )
 ```
+
+``` r
+head(d)
+```
+
+    ##    product_b total_ads treatment_ads week0 week1 week2 week3 week4 week5 week6
+    ## 1:         1         4             3   5.5   6.2   0.0   0.0   0.0   0.0   0.0
+    ## 2:         1         1             1   6.2   0.0   8.6   2.4   0.0   7.4   0.0
+    ## 3:         1         3             1   0.0   5.3   0.0   8.1   7.8   3.3   0.0
+    ## 4:         0         5             0   0.0   4.1   0.0   8.8   5.8   5.9   0.0
+    ## 5:         0         1             1   7.6   3.6   4.6   5.5   7.2   7.1   0.0
+    ## 6:         1         4             4   6.3   5.5   9.8   5.0   0.0   0.0   7.7
+    ##    week7 week8 week9 week10
+    ## 1:     0   9.7   4.1    0.0
+    ## 2:     0   0.0   5.7    0.0
+    ## 3:     0   9.4   0.0    0.0
+    ## 4:     0   0.0   9.6    0.0
+    ## 5:     0   0.0   0.0    0.0
+    ## 6:     0  11.0   4.8    6.9
 
 ## Questions to Answer
 
@@ -257,8 +276,18 @@ Some simplifying assumptions:
     and we do not need to worry about cohort effects of any kind.
 
 ``` r
-d <- fread("../data/ps5_no2.csv")
+d <- fread('https://ucb-mids-w241.s3-us-west-1.amazonaws.com/ps5_no2.csv')
+
+head(d)
 ```
+
+    ##    draft_number years_education    income
+    ## 1:          267              16  44573.90
+    ## 2:          357              13  10611.75
+    ## 3:          351              19 165467.80
+    ## 4:          205              16  71278.40
+    ## 5:           42              19  54445.09
+    ## 6:          240              11  32059.12
 
 ## Questions to Answer
 
