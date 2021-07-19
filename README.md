@@ -1,3 +1,11 @@
+# Last Problem Set 
+
+There are two questions that are mandatory for you to answer on this homework.
+
+- Question 1 asks you to use instrumental variables regression on the _classic_ case of the Vietnam draft lottery that conscripted people to be soldiers in the United States armed forces. Many people did not want to join the armed forces, and so used various methods to avoid joining. One such method was to enroll in college; at least some of the people who were enrolled in colleges at this time would not have, if not for being drafted. This question works with data to produce causal estimates of the "returns to schooling".
+- Question 2 asks you to reflect on the course, and the core estimand of the course, the ATE. 
+- (Optional) Question 3 asks you to work with an experiment that was clumsily conducted, and to communicate what did and did not work in the experiment. 
+
 # Guidelines for Submitting Documents
 ## General Guidelines 
 - Please submit a markdown document that contains all your code and answers. 
