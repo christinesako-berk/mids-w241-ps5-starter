@@ -2,7 +2,7 @@
 title: "Experiments and Causality: Problem Set 5"
 date: "12/10/2020"
 author: "Alex, Scott & Micah"
-output: github_document
+output: pdf_document
 ---
 
 ```{r load packages, message = FALSE}
@@ -17,11 +17,8 @@ library(ggplot2)
 library(patchwork)
 ```
 
-```{r QUESTION 1, child='./questions/question_1.Rmd'}
+```{r QUESTION 1, child='./question_1.Rmd'}
 ```
 
-```{r QUESTION 2, child='./questions/question_2.Rmd'}
-```
-
-```{r QUESTION 3, child='./questions/question_3.Rmd'}
+```{r QUESTION 2, child='./question_2.Rmd'}
 ```
