@@ -35,7 +35,7 @@ model_observational <- 'fill this in'
 
 >
 
-3. Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset indicating whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
+3. Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset called `high_draft` that indicates whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
 
 ```{r draft effect on education}
 model_education <- 'fill this in'
@@ -47,7 +47,7 @@ model_education <- 'fill this in'
 model_income <- 'fill this in'
 ```
 
-5. Now, estimate the Instrumental Variables regression to estiamte the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
+5. Now, estimate the Instrumental Variables regression to estimate the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
 
 ```{r instrumental variables regression} 
 model_iv <- 'fill this in'
