@@ -13,6 +13,19 @@ High draft rank induced many Americans to go to college, because being a college
 Some simplifying assumptions:
 
 - Suppose that these data are a true random sample of IRS records and that these records measure every living American’s income without error.
+- Suppose that this data is the result of the following SQL query (this information is informative for the differential attrition question): 
+
+```{SQL} 
+SELECT 
+  ssearning AS earning 
+    years_of_schooling AS years_education
+    ein AS id
+FROM irs_income_1980 
+LEFT_JOIN draft_status 
+ON id 
+DROP id 
+```
+
 - Assume that the true effect of education on income is linear in the number of years of education obtained.
 - Assume all the data points are from Americans born in a single year and we do not need to worry about cohort effects of any kind.
 
