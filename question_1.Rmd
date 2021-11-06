@@ -17,12 +17,12 @@ Some simplifying assumptions:
 
 ```{SQL} 
 SELECT 
-  ssearning AS earning 
+  ssearning AS earnings 
     years_of_schooling AS years_education
     ein AS id
 FROM irs_income_1980 
-LEFT_JOIN draft_status 
-ON id 
+JOIN draft_status 
+ON ssearning.id = draft_status.id
 DROP id 
 ```
 
