@@ -1,8 +1,11 @@
 ---
-title: "Experiments and Causality: Problem Set 5"
-date: "12/10/2020"
-author: "Alex, Scott & Micah"
-output: pdf_document
+title: "Problem Set 5"
+author: "Alex, Micah, Scott, and David"
+date: "12/01/2021"
+output:
+  pdf_document: default
+  word_document: default
+name: YOUR NAME HERE
 ---
 
 ```{r load packages, message = FALSE}
@@ -17,8 +20,21 @@ library(ggplot2)
 library(patchwork)
 ```
 
-```{r QUESTION 1, child='./question_1.Rmd'}
+```{r global options, include = FALSE}
+knitr::opts_chunk$set(include = FALSE, message = FALSE, warning = FALSE )
+
+knitr::knit_engines$set(problem_description = function(options) {
+  code <- paste(options$code, collapse = "\n")
+})
+
 ```
 
-```{r QUESTION 2, child='./question_2.Rmd'}
+```{r QUESTION 1, child='./questions/question_1.Rmd'}
 ```
+\newpage
+```{r QUESTION 2, child='./questions/question_2.Rmd'}
+```
+\newpage
+```{r QUESTION 3, child='./questions/question_3_optional.Rmd'}
+```
+\newpage

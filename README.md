@@ -1,29 +1,49 @@
-# Last Problem Set 
-
-There are two questions that are mandatory for you to answer on this homework.
-
-- Question 1 asks you to use instrumental variables regression on the _classic_ case of the Vietnam draft lottery that conscripted people to be soldiers in the United States armed forces. Many people did not want to join the armed forces, and so used various methods to avoid joining. One such method was to enroll in college; at least some of the people who were enrolled in colleges at this time would not have, if not for being drafted. This question works with data to produce causal estimates of the "returns to schooling".
-- Question 2 asks you to reflect on the course, and the core estimand of the course, the ATE. 
-- (Optional) Question 3 asks you to work with an experiment that was clumsily conducted, and to communicate what did and did not work in the experiment. 
-
 # Guidelines for Submitting Documents
-## General Guidelines 
-- Please submit a markdown document that contains all your code and answers. 
-- This document should be created by a `.Rmd` file that we can execute that produces all answers, without error. 
+
+## General Guidelines
+
+This repository has the following structure: 
+
+``` bash
+.
+├── README.md
+├── data
+│   ├── draft_data.csv
+│   └── yahoo_data.csv
+├── ps5.Rmd
+├── ps5.pdf
+└── questions
+    ├── question_1.Rmd
+    ├── question_2.Rmd
+    └── question_3_optional.Rmd
+```
+
+The top level file is the file that you use to compile all of your code. It will "take-in" the code that you've written in each of the `question_*.Rmd` files after you have saved them. Your answers to each question should be placed inside each of the `question_*.Rmd` files. 
+
+- Once you have forked and then cloned this repository, you should immediately be able to knit to a PDF. However there will not be any answers!
+- When you begin to answer a question, say, #1, you open `./questions/question_1.Rmd` and write and execute your code in this file. Once you think you've finished answering, you can save this file, and then knit everything completed to this point by returning to the top-level `ps4.Rmd` file. 
+- You might notice that in your compiled PDF the question text does not show up. This is on purpose! We assure you that we the instructors and TAs know what the question is asking. By hiding this, we can read your answers without having to also read our questions repeatedly. 
+
+## Submission
+
+- Submission is through Gradescope.
+- Your submission needs to be a PDF file that shows the necessasry code to evaluate your solution. This is probably more code than you would show in a report; but it is what you want someone who is collaborating on this to be able to read. 
+- You need to associate every page with a question/answer on Gradescope. This makes it so that our TA team can spend their time together talking about experiments and problems with you in office hours, rather than hunting to find your answers.
+  
 - You do not need to show work for trivial calculations, but showing work is always allowed.
 - For answers that involve a narrative response, please feel free to describe the key concept directly and briefly, if you can do so, and do not feel pressure to go on at length.
-- Please ask us questions about the problem set if you get stuck. *Don’t spend more than 20 minutes puzzling over what a problem means.* 
-- Please ensure that someone (us!) can compile your solution set. The best way is to use the web-hosted links we've provided. 
-- For text answers, please **embolden** your answers to the questions.
 - For computing answers, please store them in the answer objects we have created. 
 - Use inline code evaluation to write your answers.
 
 # Working Collaboratively
+
 We (all!) come from a PhD program where all of the students (now
 faculty @ UCB, Harvard, Princeton, UCLA, UofMichigan, UT-Austin)
 worked together to make everyone better. We think that the
-*collaborative* model  is a fantastic model, and We want to bring it
-forward into this class. Talk with your friends, work together on
+*collaborative* model  is a fantastic model, and we want to bring it
+forward into this class. 
+
+Talk with your friends, work together on
 homework, create study groups. We _promise_ that you will learn more
 from your friends and classmates than the instructors.
 
