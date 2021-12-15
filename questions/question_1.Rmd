@@ -1,9 +1,5 @@
----
-output:
-  pdf_document: default
-  html_document: default
----
-# 1. Vietnam Draft Lottery 
+# Vietnam Draft Lottery 
+
 ```{problem_description}
 A famous paper (http://sites.duke.edu/niou/files/2011/06/Angrist_lifetime-earningsmall.pdf) by Angrist exploits the randomized lottery for the Vietnam draft to estimate the effect of education on wages. (*Don’t worry about reading this article, it is just provided to satisfy your curiosity; you can answer the question below without referring to it. In fact, it may be easier for you not to, since he has some complications to deal with that the simple data we’re giving you do not.*)
 
@@ -43,84 +39,66 @@ d <- fread('../data/draft_data.csv')
 head(d)
 ```
 
-## Questions to Answer
-
-A. Suppose that you had not run an experiment. Estimate the "effect" of each year of education on income as an observational researcher might, by just running a regression of years of education on income (in R-ish, `income ~ years_education`). What does this naive regression suggest?
+## Observational esteimate
+Suppose that you had not run an experiment. Estimate the "effect" of each year of education on income as an observational researcher might, by just running a regression of years of education on income (in R-ish, `income ~ years_education`). What does this naive regression suggest?
 
 ```{r observational model, include=TRUE} 
 model_observational <- 'fill this in'
 ```
 
-**Narrative: ...**
+**Answer:** ...
 
+## Evaluating observational estimate 
+Continue to suppose that we did not run the experiment, but that we saw the result that you noted in part 1. Tell a concrete story about why you don't believe that observational result tells you anything causal. 
 
+**Answer:** ...
 
-
-B. Continue to suppose that we did not run the experiment, but that we saw the result that you noted in part 1. Tell a concrete story about why you don't believe that observational result tells you anything causal. 
-
-**Narrative: ...**
-
-
-
-
-C. Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset called `high_draft` that indicates whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
+## Natural experiment effect on education
+Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset called `high_draft` that indicates whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
 
 ```{r draft effect on education, include=TRUE}
 model_education <- 'fill this in'
 ```
 
-**Narrative: ...**
+**Answer:** ...
 
-
-
-
-D. Using linear regression, estimate the effect of having a high-ranked draft number on income. Report the estimate and the correct standard error.
+## Natural experiment effect on income
+Using linear regression, estimate the effect of having a high-ranked draft number on income. Report the estimate and the correct standard error.
 
 ```{r draft effect on income, include=TRUE} 
 model_income <- 'fill this in'
 ```
 
-**Narrative: ...**
+**Answer:** ...
 
-
-
-
-E. Now, estimate the Instrumental Variables regression to estimate the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
+## Instrumental variables estimate of education on income
+Now, estimate the Instrumental Variables regression to estimate the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
 
 ```{r instrumental variables regression, include=TRUE} 
 model_iv <- 'fill this in'
 ```
 
-**Narrative: ...**
-
-
-
+**Answer:** ...
 
 ```{problem_description}
 Just like the other experiments that we've covered in the course, natural experiments rely crucially on satisfying the "exclusion restriction". In the case of a medical trial, we've said this means that there can't be an effect of just "being at the doctor's office" when the doctor is giving you a treatment. In the case of an instrumental variable's setup, the *instrument* (being drafted) cannot affect the outcome (income) in any other way except through its effect on the "endogenous variable" (here, education). 
 ```
 
-F. Give one reason this requirement might not be satisfied in this context. In what ways might having a high draft rank affect individuals' income **other** than nudging them to attend more school? 
+## Evaluating the exclusion restriction
+Give one reason this requirement might not be satisfied in this context. In what ways might having a high draft rank affect individuals' income **other** than nudging them to attend more school? 
 
-**Narrative: ...**
+**Answer:** ...
 
-
-
-
-G. Conduct a test for the presence of differential attrition by treatment condition. That is, conduct a formal test of the hypothesis that the “high-ranked draft number” treatment has no effect on whether we observe a person’s income. **(Note, that an earning of $0 *actually* means they didn't earn any money -- i.e. earning $0 does not mean that their data wasn't measured.)**
+## Differential attrition
+Conduct a test for the presence of differential attrition by treatment condition. That is, conduct a formal test of the hypothesis that the “high-ranked draft number” treatment has no effect on whether we observe a person’s income. **(Note, that an earning of $0 *actually* means they didn't earn any money -- i.e. earning $0 does not mean that their data wasn't measured. Let's be really, really specific: If you write a model that looks anything like, `lm(income == 0 ~ .)` you've gone the wrong direction.)**
 
 ```{r differential attrition, include=TRUE}
 model_differential_attrition <- 'fill this in'
 ```
 
-**Narrative: ...**
+**Answer:** ...
 
+## Evaluate differential attrition
+Tell a concrete story about what could be leading to the result in part 7. How might this differential attrition create bias in the estimates of a causal effect?
 
-
-
-H. Tell a concrete story about what could be leading to the result in part 7. How might this differential attrition create bias in the estimates of a causal effect?
-
-**Narrative: ...**
-
-
-
+**Answer:** ...
