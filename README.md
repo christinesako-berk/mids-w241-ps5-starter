@@ -21,7 +21,7 @@ This repository has the following structure:
 The top level file is the file that you use to compile all of your code. It will "take-in" the code that you've written in each of the `question_*.Rmd` files after you have saved them. Your answers to each question should be placed inside each of the `question_*.Rmd` files. 
 
 - Once you have forked and then cloned this repository, you should immediately be able to knit to a PDF. However there will not be any answers!
-- When you begin to answer a question, say, #1, you open `./questions/question_1.Rmd` and write and execute your code in this file. Once you think you've finished answering, you can save this file, and then knit everything completed to this point by returning to the top-level `ps4.Rmd` file. 
+- When you begin to answer a question, say, #1, you open `./questions/question_1.Rmd` and write and execute your code in this file. Once you think you've finished answering, you can save this file, and then knit everything completed to this point by returning to the top-level `ps5.Rmd` file. 
 - You might notice that in your compiled PDF the question text does not show up. This is on purpose! We assure you that we the instructors and TAs know what the question is asking. By hiding this, we can read your answers without having to also read our questions repeatedly. 
 
 ## Submission
