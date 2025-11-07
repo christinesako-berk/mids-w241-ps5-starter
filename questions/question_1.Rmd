@@ -34,6 +34,7 @@ DROP id
 ```
 
 ```{r load draft data}
+library(data.table)
 d <- fread('../data/draft_data.csv')
 
 head(d)
@@ -43,42 +44,85 @@ head(d)
 Suppose that you had not run an experiment. Estimate the "effect" of each year of education on income as an observational researcher might, by just running a regression of years of education on income (in R-ish, `income ~ years_education`). What does this naive regression suggest?
 
 ```{r observational model, include=TRUE} 
-model_observational <- 'fill this in'
+# Naive linear model
+model_observational <- lm(income ~ years_education, data = d)
+
+# Extracting coefficients for inline reference
+obs_coefs <- coef(model_observational)
+
+summary(model_observational)
 ```
 
-**Answer:** ...
+**Answer:** This naive observational regression suggests that each additional year of education is associated with an average increase of about $`r format(round(obs_coefs[2], 0), big.mark = ",", nsmall = 0)` in annual income. This estimate is likely to overstate the causal effect of schooling because it does not take into account self-selection into education (i.e. those who would have gone to school anyway are correlated with both education and income) or variables that covary with education and income (e.g. motivation, prior financial status, etc.)
 
 ## Evaluating observational estimate 
 Continue to suppose that we did not run the experiment, but that we saw the result that you noted in part 1. Tell a concrete story about why you don't believe that observational result tells you anything causal. 
 
-**Answer:** ...
+**Answer:** Suppose there are two different people, Taylor and Avery who have very different backgrounds. Taylor grew up in a wealthy family who always prioritized education and placed Taylor in various education programs and the best schools. Avery grew up less financially fortunate and was not planning to go to college due to not being able to afford it, instead Avery planned to work directly after high school. Let's say Taylor goes to a 4-year college and ends up having 16 total years of education, whereas Avery only completes 12 total years of education. Let's further say Taylor ends up earning $73k a year and Avery earns $50K a year. Without accounting for all the background covariates, a naive regression would take just the years of education and income and assume each year of additional schooling leads to an additional $`r format(round(obs_coefs[2], 0), big.mark = ",", nsmall = 0)` in income ($`r format(round(obs_coefs[2], 0), big.mark = ",", nsmall = 0)` * 4 = $`r format(round(obs_coefs[2] * 4, 0), big.mark = ",", nsmall = 0)`). The problem with this regression is that it does not consider all of the background information that may have lead to Taylor making more money regardless of years of schooling, and similarly, information that may have indicated that Avery would have earned less even with more years of schooling.
 
 ## Natural experiment effect on education
 Now, let’s get to using the natural experiment. Define "having a high-ranked draft number" as having a draft number between 1-80. For the remaining 285 days of the year, consider them having a "low-ranked" draft number). Create a variable in your dataset called `high_draft` that indicates whether each person has a high-ranked draft number or not. Using a regression, estimate the effect of having a high-ranked draft number on years of education obtained. Report the estimate and a correctly computed standard error. (*Hint: How is the assignment to having a draft number conducted? Does random assignment happen at the individual level? Or, at some higher level?)
 
 ```{r draft effect on education, include=TRUE}
-model_education <- 'fill this in'
+library(sandwich)
+library(lmtest)
+
+# Defining high-ranked draft indicator
+d$high_draft <- ifelse(d$draft_number <= 80, 1, 0)
+
+# Regressing years of education on the high-ranked draft indicator
+model_education <- lm(years_education ~ high_draft, data = d)
+summary(model_education)
+
+# Computing cluster-robust standard errors since assignment happens at the birthday/draft-number level
+cluster_se_edu <- sqrt(diag(vcovCL(model_education, cluster = ~draft_number)))
+
+# Extracting coefficients for inline reference
+coef_estimate_edu <- coef(model_education)["high_draft"]
+se_clustered_edu  <- cluster_se_edu["high_draft"]
+
 ```
 
-**Answer:** ...
+**Answer:** Having a high-ranked draft number (1-80) is associated with an increase of approximately `r round(coef_estimate_edu, 4)` years of education, with a cluster-robust standard error of `r round(se_clustered_edu, 4)`. We use cluster-robust standard errors since assignment to the high-ranked draft group is done at the birthday/draft number level vs. the at the individual level.
 
 ## Natural experiment effect on income
 Using linear regression, estimate the effect of having a high-ranked draft number on income. Report the estimate and the correct standard error.
 
 ```{r draft effect on income, include=TRUE} 
-model_income <- 'fill this in'
+# Regressing income on the the `high_draft` indicator
+model_income <- lm(income ~ high_draft, data = d)
+summary(model_income)
+
+# Computing cluster-robust standard errors since assignment happens at the birthday/draft-number level
+cluster_se_inc <- sqrt(diag(vcovCL(model_income, cluster = ~draft_number)))
+
+# Extracting coefficients for inline reference
+coef_estimate_inc <- coef(model_income)["high_draft"]
+se_clustered_inc  <- cluster_se_edu["high_draft"]
+
 ```
 
-**Answer:** ...
+**Answer:** High-ranked draft numbers (1-80) are associated with an increase of approximately $`r format(round(coef_estimate_inc, 0), big.mark = ",", nsmall = 0)` in income, with a cluster-robust standard error of `r round(se_clustered_inc,2)`. We use cluster-robust standard errors since assignment to the high-ranked draft group is made at the birthday/draft number level.
 
 ## Instrumental variables estimate of education on income
 Now, estimate the Instrumental Variables regression to estimate the effect of education on income. To do so, use `AER::ivreg`. After you evaluate your code, write a narrative description about what you learn. 
 
-```{r instrumental variables regression, include=TRUE} 
-model_iv <- 'fill this in'
+```{r instrumental variables regression, include=TRUE}
+library(AER)
+
+# Regressing income on years of education using `high_draft` as an IV
+model_iv <- ivreg(income ~ years_education | high_draft, data = d)
+summary(model_iv)
+
+# Computing clustered variance-covariance matrix
+cluster_se_iv <- sqrt(diag(vcovCL(model_iv, cluster = ~draft_number)))
+
+# Extracting cluster-robust standard error for years_education
+se_years_education <- cluster_se_iv["years_education"]
+
 ```
 
-**Answer:** ...
+**Answer:** Using `high_draft` as an instrument in a 2SLS regression, we estimate that each additional year of education increases annual income by approximately $`r format(round(coef(model_iv)["years_education"], 0), big.mark = ",", nsmall = 0)`, with a cluster-robust standard error of SE = `r round(se_years_education, 4)`. The smaller coefficient on `years_education`, compared to the naive observational regression, suggests that the simple OLS model overstates the effect of education because it fails to account for both selection bias and omitted variables. In contrast, the IV estimate leverages random variation in education induced by the draft lottery to more credibly isolate the causal effect of education on income, as well as incorporation of variables that are correlated with both schooling and income.
 
 ```{problem_description}
 Just like the other experiments that we've covered in the course, natural experiments rely crucially on satisfying the "exclusion restriction". In the case of a medical trial, we've said this means that there can't be an effect of just "being at the doctor's office" when the doctor is giving you a treatment. In the case of an instrumental variable's setup, the *instrument* (being drafted) cannot affect the outcome (income) in any other way except through its effect on the "endogenous variable" (here, education). 
@@ -87,18 +131,28 @@ Just like the other experiments that we've covered in the course, natural experi
 ## Evaluating the exclusion restriction
 Give one reason this requirement might not be satisfied in this context. In what ways might having a high draft rank affect individuals' income **other** than nudging them to attend more school? 
 
-**Answer:** ...
+**Answer:** The exclusion could be violated in the case where having a high-draft rank influences income via participation/non-participation in the military service itself. Those who do not have a high-draft number and participate in the military might have certain induced experiences that have lasting effects on their physical and mental health, which can in turn affect their participation and experience in the labor force. This chain of effects could alter their lifetime earnings independent of education, which violates the assumption that the high-draft rank as an IV affects the outcome (earnings) only via its effect on education.
 
 ## Differential attrition
 Conduct a test for the presence of differential attrition by treatment condition. That is, conduct a formal test of the hypothesis that the “high-ranked draft number” treatment has no effect on whether we observe a person’s income. **(Note, that an earning of $0 *actually* means they didn't earn any money -- i.e. earning $0 does not mean that their data wasn't measured. Let's be really, really specific: If you write a model that looks anything like, `lm(income == 0 ~ .)` you've gone the wrong direction.)**
 
 ```{r differential attrition, include=TRUE}
-model_differential_attrition <- 'fill this in'
+# Defining indicator variable for an observed outcome
+d$observed_outcome <- !is.na(d$income)
+
+# Counting missing observed outcomes
+cat("Number of missing observed outcomes:", sum(is.na(d$income)),"\n")
+
+# Regressing observation status on `high_draft` 
+model_differential_attrition <- lm(observed_outcome ~ high_draft, data = d)
+summary(model_differential_attrition)
+
+
 ```
 
-**Answer:** ...
+**Answer:** Regressing an indicator variable for non-null observed outcomes (`observed_outcome`) on `high_draft` to test whether assignment to a high draft number affects the likelihood of having an observed income, we see that the coefficient on `high_draft` negligible (`r signif(coef(model_differential_attrition)["high_draft"], 4)`) and statistically insignificant (p = `r signif(summary(model_differential_attrition)$coefficients["high_draft", "Pr(>|t|)"], 4)`). When inspecting the dataset, we confirm that there are no missing values in `income`, which helps explain why treatment status had no effect on whether an observation's outcome was measured. Therefore, there is no evidence of differential attrition (or any attrition) by draft assignment and attrition does not pose a threat to the validity of our IV analysis.
 
 ## Evaluate differential attrition
 Tell a concrete story about what could be leading to the result in part 7. How might this differential attrition create bias in the estimates of a causal effect?
 
-**Answer:** ...
+**Answer:** We did not find any missing values of `income` in our dataset, which means there was no differential attrition (or any attrition at all). In principle, however, differential attrition could bias our estimates if the likelihood of observing `income` was correlated with draft number and consequently `high_draft`. For example, if individuals with low draft numbers were more likely to be drafted and thus harder to track for income data, the observed sample would over-represent those with high draft numbers, potentially biasing the IV estimate upward (according to our IV analysis). Conversely, if individuals with high draft numbers were more likely to be missing, the observed sample would over-represent those with low draft numbers, potentially biasing the IV estimate downward (according to our IV analysis).

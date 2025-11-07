@@ -1,11 +1,11 @@
 ---
 title: "Problem Set 5"
-author: "Alex, Micah, Scott, and David"
-date: "12/01/2021"
+author: "Christine Sako"
+date: "11/07/2025"
 output:
   pdf_document: default
   word_document: default
-name: YOUR NAME HERE
+name: Christine Sako
 ---
 
 ```{r load packages, message = FALSE}
